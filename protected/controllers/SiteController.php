@@ -42,10 +42,12 @@ class SiteController extends Controller
     }
 
     /**
-     * Start the execution of th emodel generation script
+     * Start the execution of the model generation script
      */
     public function actionGenerateModel() {
-        //shell_exec('');
+        if(file_exists(Yii::app()->getBasePath() . '/../uploads/process.sh')) {
+            shell_exec('bash process.sh');
+        }
     }
 
     /**
@@ -56,7 +58,7 @@ class SiteController extends Controller
             'ready'=> false,
         );
         if(file_exists(Yii::app()->getBasePath() . '/../uploads/' .
-                Yii::app()->user->getId() . '-modCopter' . '/3DModel.txt')) {
+                Yii::app()->user->getId() . '-modCopter' . '/output/modcopter.obj')) {
             $result['ready'] = true;
         }
 
@@ -69,11 +71,11 @@ class SiteController extends Controller
      */
     public function actionDownloadModel() {
         if(file_exists(Yii::app()->getBasePath() . '/../uploads/' .
-            Yii::app()->user->getId() . '-modCopter' . '/3DModel.txt')) {
+            Yii::app()->user->getId() . '-modCopter' . '/output/modcopter.obj')) {
 
-            $file =  '3DModel.txt';
+            $file =  'modcopter.obj';
             return Yii::app()->getRequest()->sendFile(basename($file), @file_get_contents(Yii::app()->getBasePath().
-                '/../uploads/' . Yii::app()->user->getId() . '-modCopter/'.$file));
+                '/../uploads/' . Yii::app()->user->getId() . '-modCopter/output/'.$file));
         }
     }
 
