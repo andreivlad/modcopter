@@ -13,11 +13,11 @@ protected/runtime/
 
 #config
 #protected/config/console.php
-#protected/config/main.php
+protected/config/main.php
 
 #image upload folder
 /images
-/uploads
+uploads/
 
 
 # yii folders
