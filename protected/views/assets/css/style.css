@@ -29,3 +29,8 @@ table.table-striped td.preview img {
     display: none;
     width: 385px;
 }
+
+.table.table-striped .progress.progress-success .bar {
+    height: 100%;
+    background-color: #48D4D5;
+}
