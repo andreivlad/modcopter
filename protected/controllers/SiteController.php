@@ -46,7 +46,6 @@ class SiteController extends Controller
      */
     public function actionGenerateModel() {
         if(file_exists(Yii::app()->getBasePath() . '/../uploads/process.sh')) {
-            shell_exec('export DISPLAY=:1');
             shell_exec('bash ' . Yii::app()->getBasePath() . '/../uploads/process.sh');
         }
     }
