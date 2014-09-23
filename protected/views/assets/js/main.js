@@ -29,7 +29,7 @@ mod = {
                 if(response.ready) {
                     //Model is ready, download the model
                     clearInterval( mod.modelGeneration.requestRepeaterInterval);
-                    $('body').append('<iframe src="/site/downloadModel" style="display: none;" ></iframe>');
+                    $('body').append('<iframe src="site/downloadModel" style="display: none;" ></iframe>');
                 }
             });
         }

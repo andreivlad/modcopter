@@ -47,9 +47,8 @@ class SiteController extends Controller
     public function actionGenerateModel() {
         if(file_exists(Yii::app()->getBasePath() . '/../uploads/process.sh')) {
             chdir(Yii::app()->getBasePath() . '/../uploads/');
-            echo shell_exec('pwd');
-            //2>&1
-            echo shell_exec('./process.sh|at now');
+            //for debugging remove |at now and add 2>&1
+            echo shell_exec('./process.sh|at now'); //runs processing script as a separate process
         }
     }
 
