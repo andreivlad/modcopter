@@ -48,7 +48,7 @@ class SiteController extends Controller
         if(file_exists(Yii::app()->getBasePath() . '/../uploads/process.sh')) {
             chdir(Yii::app()->getBasePath() . '/../uploads/');
             //for debugging remove |at now and add 2>&1
-            echo shell_exec('./process.sh 2>&1'); //runs processing script as a separate process
+            echo shell_exec('./process.sh|at now'); //runs processing script as a separate process
         }
     }
 
