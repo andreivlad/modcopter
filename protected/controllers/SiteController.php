@@ -60,7 +60,7 @@ class SiteController extends Controller
             'ready'=> false,
         );
         if(file_exists(Yii::app()->getBasePath() . '/../uploads/' .
-                Yii::app()->user->getId() . '-modCopter' . '/output/modcopter.obj')) {
+                Yii::app()->user->getId() . '-modCopter' . '/output.zip')) {
             $result['ready'] = true;
         }
 
@@ -73,11 +73,11 @@ class SiteController extends Controller
      */
     public function actionDownloadModel() {
         if(file_exists(Yii::app()->getBasePath() . '/../uploads/' .
-            Yii::app()->user->getId() . '-modCopter' . '/output/modcopter.obj')) {
+            Yii::app()->user->getId() . '-modCopter' . '/output.zip')) {
 
-            $file =  'modcopter.obj';
+            $file =  'output.zip';
             return Yii::app()->getRequest()->sendFile(basename($file), @file_get_contents(Yii::app()->getBasePath().
-                '/../uploads/' . Yii::app()->user->getId() . '-modCopter/output/'.$file));
+                '/../uploads/' . Yii::app()->user->getId() . '-modCopter/'.$file));
         }
     }
 
