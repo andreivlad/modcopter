@@ -44,4 +44,31 @@ class Controller extends CController
         }
         Yii::app()->end();
     }
+
+    /**
+     * Deletes directory (unless removeDirectory is false) and contents
+     * @param $dirPath
+     * @param bool $removeDirectory
+     * @throws InvalidArgumentException
+     */
+    protected function deleteDir($dirPath, $removeDirectory = true) {
+        if (! is_dir($dirPath)) {
+            throw new InvalidArgumentException("$dirPath must be a directory");
+        }
+        if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
+            $dirPath .= '/';
+        }
+        $files = glob($dirPath . '*', GLOB_MARK);
+        foreach ($files as $file) {
+            if (is_dir($file)) {
+                self::deleteDir($file);
+            } else {
+                unlink($file);
+            }
+        }
+
+        if(!empty($removeDirectory)) {
+            rmdir($dirPath);
+        }
+    }
 }

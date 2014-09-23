@@ -14,7 +14,7 @@ $this->widget('xupload.XUpload', array(
 <div id="processing-dialog" title="Starting processing" style="display: none">
     <p>Image uploading is done. Starting 3D model generation.</p>
     <p>The process can take several minutes depending on the model.</p>
-    <p>You will be provided with a download link when the model is complete.</p>
+    <p>The download will start automatically when the model is complete.</p>
 </div>
 
 <script type="text/javascript">

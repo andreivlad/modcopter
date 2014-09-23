@@ -48,7 +48,7 @@ class SiteController extends Controller
         if(file_exists(Yii::app()->getBasePath() . '/../uploads/process.sh')) {
             chdir(Yii::app()->getBasePath() . '/../uploads/');
             //for debugging remove |at now and add 2>&1
-            echo shell_exec('./process.sh|at now'); //runs processing script as a separate process
+            shell_exec('./process.sh|at now'); //runs processing script as a separate process
         }
     }
 
@@ -89,6 +89,11 @@ class SiteController extends Controller
 	{
         Yii::import("xupload.models.XUploadForm");
         $model = new XUploadForm;
+
+        //Clear upload folder
+        $this->deleteDir(Yii::app()->getBasePath() . '/../uploads/' .
+            Yii::app()->user->getId() . '-modCopter', false);
+
         $this -> render('index', array('model' => $model));
 	}
 

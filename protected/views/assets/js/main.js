@@ -4,7 +4,7 @@ mod = {
             $('#XUploadForm-form').bind('fileuploadprogressall', function (e, data) {
                 if (data.loaded == data.total){
                     $('#processing-generate').show();
-                    $( "#processing-dialog" ).dialog();
+                    $("#processing-dialog").dialog();
 
                     //Ajax request to execute shell script
                     $.post('site/generateModel', function() {
@@ -17,7 +17,7 @@ mod = {
     },
     modelGeneration: {
         requestRepeaterInterval: null,
-        //Gets called 5 minutes after model generation is started
+        //Gets called 3 minutes after model generation is started
         requestRepeater:function () {
             mod.modelGeneration.requestRepeaterInterval =
                 //Check every 20 seconds if model is ready
@@ -30,6 +30,8 @@ mod = {
                     //Model is ready, download the model
                     clearInterval( mod.modelGeneration.requestRepeaterInterval);
                     $('body').append('<iframe src="site/downloadModel" style="display: none;" ></iframe>');
+                    $('#processing-generate').hide();
+                    $("#processing-dialog").dialog('close');
                 }
             });
         }
