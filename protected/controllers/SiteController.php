@@ -75,6 +75,10 @@ class SiteController extends Controller
         if(file_exists(Yii::app()->getBasePath() . '/../uploads/' .
             Yii::app()->user->getId() . '-modCopter' . '/output.zip')) {
 
+            //Temporary solution to stop photoscan after processing is complete
+            $pid = shell_exec('pidof photoscan');
+            shell_exec('kill ' . $pid);
+
             $file =  'output.zip';
             return Yii::app()->getRequest()->sendFile(basename($file), @file_get_contents(Yii::app()->getBasePath().
                 '/../uploads/' . Yii::app()->user->getId() . '-modCopter/'.$file));
