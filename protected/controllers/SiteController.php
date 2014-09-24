@@ -61,6 +61,11 @@ class SiteController extends Controller
         $pid = shell_exec('pidof photoscan');
         if(empty($pid)) {
             $error = true;
+        }elseif(file_exists(Yii::app()->getBasePath() . '/../uploads/' .
+            Yii::app()->user->getId() . '-modCopter' . '/output')) {
+            //@TODO Temporary solution in case processing doesn't start
+            shell_exec('xdotool mousemove  485 60 click 1');
+            shell_exec('xdotool mousemove  485 85 click 1');
         }
 
         $result = array(
