@@ -98,6 +98,10 @@ class SiteController extends Controller
         $this->deleteDir(Yii::app()->getBasePath() . '/../uploads/' .
             Yii::app()->user->getId() . '-modCopter', false);
 
+        //Temporary solution, make sure photoscan is closed before new instance is launched
+        $pid = shell_exec('pidof photoscan');
+        shell_exec('kill ' . $pid);
+
         $this -> render('index', array('model' => $model));
 	}
 
