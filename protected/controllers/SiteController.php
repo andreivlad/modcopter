@@ -49,6 +49,13 @@ class SiteController extends Controller
             chdir(Yii::app()->getBasePath() . '/../uploads/');
             //for debugging remove |at now and add 2>&1
             shell_exec('./process.sh|at now'); //runs processing script as a separate process
+
+            //@TODO Temporary solution in case processing doesn't start
+            if(file_exists(Yii::app()->getBasePath() . '/../uploads/' .
+                Yii::app()->user->getId() . '-modCopter' . '/output')) {
+                shell_exec('xdotool mousemove  485 60 click 1');
+                shell_exec('xdotool mousemove  485 85 click 1');
+            }
         }
     }
 
