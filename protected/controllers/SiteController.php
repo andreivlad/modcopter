@@ -56,8 +56,16 @@ class SiteController extends Controller
      * Checks if the model has finished generating
      */
     public function actionIsModelReady() {
+        //@TODO Temporary solution to warn user if photoscan hasn't started
+        $error = false;
+        $pid = shell_exec('pidof photoscan');
+        if(empty($pid)) {
+            $error = true;
+        }
+
         $result = array(
             'ready'=> false,
+            'error' => $error
         );
         if(file_exists(Yii::app()->getBasePath() . '/../uploads/' .
                 Yii::app()->user->getId() . '-modCopter' . '/output.zip')) {
@@ -75,7 +83,7 @@ class SiteController extends Controller
         if(file_exists(Yii::app()->getBasePath() . '/../uploads/' .
             Yii::app()->user->getId() . '-modCopter' . '/output.zip')) {
 
-            //Temporary solution to stop photoscan after processing is complete
+            //@TODO Temporary solution to stop photoscan after processing is complete
             $pid = shell_exec('pidof photoscan');
             shell_exec('kill ' . $pid);
 
@@ -98,7 +106,7 @@ class SiteController extends Controller
         $this->deleteDir(Yii::app()->getBasePath() . '/../uploads/' .
             Yii::app()->user->getId() . '-modCopter', false);
 
-        //Temporary solution, make sure photoscan is closed before new instance is launched
+        //@TODO Temporary solution, make sure photoscan is closed before new instance is launched
         $pid = shell_exec('pidof photoscan');
         shell_exec('kill ' . $pid);
 

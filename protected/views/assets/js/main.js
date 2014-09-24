@@ -26,7 +26,9 @@ mod = {
         //Gets called every 10 seconds to check if model is ready
         getModelLinkIfReady: function () {
             $.post('site/isModelReady', function(response) {
-                if(response.ready) {
+                if(response.error) {
+                    alert('Server error. Please refresh the page and try again.');
+                } else if(response.ready) {
                     //Model is ready, download the model
                     clearInterval( mod.modelGeneration.requestRepeaterInterval);
                     $('body').append('<iframe src="site/downloadModel" style="display: none;" ></iframe>');
