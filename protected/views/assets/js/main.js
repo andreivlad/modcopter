@@ -8,7 +8,7 @@ mod = {
 
                     //Ajax request to execute shell script
                     $.post('site/generateModel', function() {
-                        //Check if model is ready after 3 minutes
+                        //Check if model is ready after a few minutes
                         setTimeout(mod.modelGeneration.requestRepeater,  1 * 60 * 1000);
                     });
                 }
@@ -17,13 +17,13 @@ mod = {
     },
     modelGeneration: {
         requestRepeaterInterval: null,
-        //Gets called 3 minutes after model generation is started
+        //Gets called a few minutes after model generation is started
         requestRepeater:function () {
             mod.modelGeneration.requestRepeaterInterval =
-                //Check every 20 seconds if model is ready
-                setInterval(mod.modelGeneration.getModelLinkIfReady, 20 * 1000);
+                //Check every 10 seconds if model is ready
+                setInterval(mod.modelGeneration.getModelLinkIfReady, 10 * 1000);
         },
-        //Gets called every 20 seconds to check if model is ready
+        //Gets called every 10 seconds to check if model is ready
         getModelLinkIfReady: function () {
             $.post('site/isModelReady', function(response) {
                 if(response.ready) {
